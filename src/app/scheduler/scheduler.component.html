@@ -3,12 +3,12 @@
 <form (ngSubmit)="agendarTransferencia()" #formAgendamento="ngForm">
   <div>
     <label>Documento de Origem:</label>
-    <input type="text" name="documentoOrigem" [(ngModel)]="agendamento.documentoOrigem" required />
+    <input type="number" name="documentoOrigem" [(ngModel)]="agendamento.documentoOrigem" required />
   </div>
 
   <div>
     <label>Documento de Destino:</label>
-    <input type="text" name="documentoDestino" [(ngModel)]="agendamento.documentoDestino" required />
+    <input type="number" name="documentoDestino" [(ngModel)]="agendamento.documentoDestino" required />
   </div>
 
   <div>
@@ -18,7 +18,7 @@
 
   <div>
     <label>Valor da Transferência:</label>
-    <input type="number" name="valor" [(ngModel)]="agendamento.valor" required />
+    <input type="number" name="valor" [(ngModel)]="agendamento.valor" required min="0"/>
   </div>
 
   <button type="submit" [disabled]="formAgendamento.invalid">Agendar</button>
