@@ -13,12 +13,16 @@ export interface Agendamento {
 export class SchedulerService {
   constructor(private http: HttpClient) {}
 
-  agendarTransferencia(dados: any) {
-    return this.http.post('http://localhost:9090/scheduler-financial-transfer/v1/schedule', dados,
+  agendarTransferencia(dados: Agendamento) {
+    return this.http.post('http://localhost:9090/scheduler-financial-transfer/v1/schedule', 
+      {
+        'dateSchedule': dados.dataAgendamento,
+        'transferValue': dados.valor
+      },
       {
         headers: new HttpHeaders({
-          'documentoOrigem': dados.documentoOrigem,
-          'documentoDestino': dados.documentoDestino
+          'originAccountId': dados.documentoOrigem,
+          'destinationAccountId': dados.documentoDestino
         })
     });
   }
