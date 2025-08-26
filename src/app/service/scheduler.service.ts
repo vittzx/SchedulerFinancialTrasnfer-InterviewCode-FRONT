@@ -9,28 +9,17 @@ export interface Agendamento {
   valor: number | null;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SchedulerService {
-
-  private baseUrl = 'http://localhost:9090'
-  private apiUrl = '/scheduler-trasnfer/v1/schedule';
-
   constructor(private http: HttpClient) {}
 
-  agendarTransferencia(agendamento: Agendamento): Observable<any> {
-    const headers = new HttpHeaders({
-      'documentoOrigem': agendamento.documentoOrigem,
-      'documentoDestino': agendamento.documentoDestino
+  agendarTransferencia(dados: any) {
+    return this.http.post('http://localhost:9090/scheduler-financial-transfer/v1/schedule', dados,
+      {
+        headers: new HttpHeaders({
+          'documentoOrigem': dados.documentoOrigem,
+          'documentoDestino': dados.documentoDestino
+        })
     });
-
-    // Corpo só com dataAgendamento e valor
-    const body = {
-      dataAgendamento: agendamento.dataAgendamento,
-      valor: agendamento.valor
-    };
-
-    return this.http.post(this.apiUrl, body, { headers });
   }
 }

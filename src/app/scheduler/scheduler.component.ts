@@ -1,11 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { Agendamento, SchedulerService } from '../service/scheduler.service';
 
 @Component({
   selector: 'scheduler',
   templateUrl: './scheduler.component.html',
-  imports: [FormsModule],
+  imports: [FormsModule,HttpClientModule],
   styleUrls: ['./scheduler.component.css']
 })
 export class SchedulerComponent {
@@ -16,7 +17,7 @@ export class SchedulerComponent {
     valor: null
   };
 
-  constructor(@Inject(String) private schedulerService: SchedulerService) {}
+  constructor(private schedulerService: SchedulerService) {}
 
   agendarTransferencia() {
     this.schedulerService.agendarTransferencia(this.agendamento).subscribe({
