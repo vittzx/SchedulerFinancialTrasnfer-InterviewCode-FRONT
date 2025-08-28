@@ -20,6 +20,8 @@ export class SchedulerComponent {
   constructor(private schedulerService: SchedulerService) {}
 
   agendarTransferencia() {
+    let dataAux = new Date(this.agendamento.dataAgendamento as string)
+    this.agendamento.dataAgendamento = `${String(dataAux.getDate() + 1).padStart(2, '0')}/${String(dataAux.getMonth() + 1).padStart(2, '0')}/${dataAux.getFullYear()}`
     this.schedulerService.agendarTransferencia(this.agendamento).subscribe({
       next: (response) => {
         console.log('Transferência agendada:', response);

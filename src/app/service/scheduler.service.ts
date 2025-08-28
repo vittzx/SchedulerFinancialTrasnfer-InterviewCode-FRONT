@@ -17,12 +17,14 @@ export class SchedulerService {
     return this.http.post('http://localhost:9090/scheduler-financial-transfer/v1/schedule', 
       {
         'dateSchedule': dados.dataAgendamento,
-        'transferValue': dados.valor
+        'transferValue': dados.valor,
       },
       {
         headers: new HttpHeaders({
-          'originAccountId': dados.documentoOrigem,
-          'destinationAccountId': dados.documentoDestino
+          'origin-account-id': dados.documentoOrigem,
+          'destination-account-id': dados.documentoDestino,
+          'x-permission-x': 'INTERNAL_SCHEDULER', // viavel estar em uma secret
+          'login': 'cosso' // dinamico pelo logon do usuario 
         })
     });
   }
